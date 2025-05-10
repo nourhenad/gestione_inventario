@@ -22,7 +22,6 @@ class UsersController < Sinatra::Base
     halt 401, { error: "Token non valido" }.to_json unless payload
   end
 
-  # GET /users - lista utenti
   get '/users' do
     begin
       result = DB.exec("SELECT id, username, nome, cognome, data_nascita FROM utenti ORDER BY id")
@@ -36,7 +35,7 @@ class UsersController < Sinatra::Base
     end
   end
 
-  # POST /users - crea nuovo utente
+  
   post '/users' do
     data = JSON.parse(request.body.read)
 
@@ -94,7 +93,7 @@ class UsersController < Sinatra::Base
     { message: "Utente creato con successo" }.to_json
   end
 
-  # PUT /users/:id - aggiorna utente
+  
   put '/users/:id' do
     id = params['id']
     data = JSON.parse(request.body.read)
@@ -140,7 +139,7 @@ class UsersController < Sinatra::Base
     { message: "Utente aggiornato" }.to_json
   end
 
-  # DELETE /users/:id - elimina utente
+  
   delete '/users/:id' do
     id = params['id']
     DB.exec_params("DELETE FROM utenti WHERE id = $1", [id])

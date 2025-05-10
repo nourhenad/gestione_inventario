@@ -36,7 +36,7 @@ def create_admin_user
     return
   end
 
-  # Inserisci l'utente nel DB
+ 
   conn.exec_params("INSERT INTO utenti (username, password_hash, nome, cognome, data_nascita,email)
                     VALUES ($1, $2, $3, $4, $5,$6)", [username, hashed_password, nome, cognome, data_nascita,email])
 

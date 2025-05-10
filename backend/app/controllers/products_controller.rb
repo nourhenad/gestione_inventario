@@ -17,7 +17,7 @@ class ProductsController < Sinatra::Base
     set :expose_headers, ['Content-Type']
   end
 
-  # Per rispondere alle richieste OPTIONS preflight
+  
   options '*' do
     response.headers['Allow'] = 'HEAD,GET,POST,PUT,DELETE,OPTIONS'
     response.headers['Access-Control-Allow-Origin'] = '*'
@@ -37,7 +37,7 @@ class ProductsController < Sinatra::Base
     payload = JwtService.decode(token)
     halt 401, { error: "Token non valido" }.to_json unless payload
   end
-# GET /products - lista completa con nome tipo
+
 get '/products' do
   begin
     result = DB.exec(
@@ -57,7 +57,6 @@ get '/products' do
 end
 
 
-  # POST /products - crea nuovo prodotto
   post '/products' do
     data = JSON.parse(request.body.read)
 
@@ -90,7 +89,7 @@ end
     { message: "Prodotto inserito" }.to_json
   end
 
-  # PUT /products/:id - modifica prodotto
+
   put '/products/:id' do
     id = params['id']
     data = JSON.parse(request.body.read)
@@ -105,14 +104,14 @@ end
     { message: "Prodotto aggiornato" }.to_json
   end
 
-  # DELETE /products/:id - elimina prodotto
+  
   delete '/products/:id' do
     id = params['id']
     DB.exec_params("DELETE FROM prodotti WHERE id = $1", [id])
     { message: "Prodotto eliminato" }.to_json
   end
 
-  # GET /product-types - elenco tipi prodotto (senza login)
+ 
   get '/product-types' do
     result = DB.exec("SELECT * FROM tipi_prodotti ORDER BY id")
     result.map(&:to_h).to_json

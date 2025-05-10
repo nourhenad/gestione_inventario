@@ -24,7 +24,6 @@ require_relative '../../config/db'
       response.headers['Access-Control-Allow-Credentials'] = 'true'
     end
   
-    # Gestione preflight OPTIONS (CORS)
     options '*' do
       200
     end
@@ -55,13 +54,13 @@ require_relative '../../config/db'
       }.to_json
     end
   
-# Logout
+
 post '/logout' do
   response.delete_cookie('token')
   status 204
 end
 
-# Recupero password (invio link con token)
+
 post '/recover-password' do
   begin
     data = JSON.parse(request.body.read)
@@ -95,7 +94,7 @@ post '/recover-password' do
   end
 end
 
-# Reset della password tramite token
+
 post '/reset-password' do
   begin
     data = JSON.parse(request.body.read)
@@ -128,10 +127,9 @@ post '/reset-password' do
   end
 end
 
-## Metodo di supporto per simulare l'invio di una email di recupero password
+
 require 'mail'
 
-# Configura il metodo di invio email (SMTP)
 Mail.defaults do
   delivery_method :smtp, {
     address:              'smtp.mailtrap.io', # oppure smtp.gmail.com
@@ -143,7 +141,7 @@ Mail.defaults do
   }
 end
 
-# Metodo per inviare email di recupero
+
 def send_recovery_email(user, token)
   email = user['email']
   link = "http://localhost:3000/recupera-password?token=#{token}"

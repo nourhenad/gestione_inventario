@@ -59,7 +59,7 @@ class TipiController < Sinatra::Base
       data = JSON.parse(request.body.read)
       nuovo_tipo = data["tipo"]
 
-      # Verifica che il tipo sia valido (Buste, Carta, Toner)
+      
       if ['Buste', 'Carta', 'Toner'].include?(nuovo_tipo)
         tipo_aggiornato = TypeProduct.update(params[:id], nuovo_tipo)
         tipo_aggiornato.to_json

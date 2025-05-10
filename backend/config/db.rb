@@ -17,7 +17,7 @@ rescue PG::Error => e
 end
 
 
-# Inizializzazione ActiveRecord
+
 begin
   ActiveRecord::Base.establish_connection(
     adapter: 'postgresql',

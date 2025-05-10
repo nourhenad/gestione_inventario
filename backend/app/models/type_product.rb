@@ -16,13 +16,12 @@ class TypeProduct
     { id: result['id'], tipo: result['tipo'] }
   end
 
-  # Aggiorna un tipo di prodotto esistente
   def self.update(id, tipo)
     result = DB.exec_params("UPDATE tipi_prodotti SET tipo = $1 WHERE id = $2 RETURNING id, tipo", [tipo, id]).first
     result ? { id: result['id'], tipo: result['tipo'] } : nil
   end
 
-  # Elimina un tipo di prodotto
+
   def self.delete(id)
     DB.exec_params("DELETE FROM tipi_prodotti WHERE id = $1", [id])
   end

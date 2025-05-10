@@ -1,0 +1,20 @@
+/* Importa Bootstrap Italia da CDN */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-italia@2.6.1/dist/css/bootstrap-italia.min.css");
+
+/* Eventuali personalizzazioni globali */
+body {
+  background-color: #f2f4f6;
+  font-family: system-ui, sans-serif;
+}
+
+.container {
+  max-width: 960px;
+}
+
+a {
+  text-decoration: none;
+}
+
+nav a {
+  color: inherit;
+}
